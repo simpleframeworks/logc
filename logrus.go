@@ -48,11 +48,11 @@ func (l *Logrus) WithError(err error) Logger {
 }
 
 // NewLogrus compatible logger
-func NewLogrus(logger *logrus.Logger) *Logrus {
+func NewLogrus(logger *logrus.Logger) Logger {
 	return &Logrus{logrus.NewEntry(logger)}
 }
 
 // NewLogrusEntry compatible logger
-func NewLogrusEntry(entry *logrus.Entry) *Logrus {
+func NewLogrusEntry(entry *logrus.Entry) Logger {
 	return &Logrus{entry}
 }
