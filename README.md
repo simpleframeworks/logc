@@ -2,7 +2,7 @@
 
 A common and universal logging interface that every package in the `simple frameworks` org uses. 
 
-[![test status](https://github.com/simpleframeworks/LogC/actions/workflows/test.yml/badge.svg?branch=main "test status")](https://github.com/simpleframeworks/LogC/actions)
+[![test status](https://github.com/simpleframeworks/LogC/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/simpleframeworks/LogC/actions)
 
 Adapters to common logging libraries are provided so whatever logging library that you decide to use can be supported.
 
