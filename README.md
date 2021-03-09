@@ -21,7 +21,7 @@ type Logger interface {
 
 ```
 
-## Using with logrus
+## Logrus example
 
 ```go
 
