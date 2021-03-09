@@ -21,7 +21,15 @@ type Logger interface {
 
 ```
 
-## Logrus example
+### Download it
+
+```
+go get -u github.com/simpleframeworks/LogC
+```
+
+### Logrus example
+
+An outgoing adapter is used to send log messages. Here we use [Logrus](https://github.com/sirupsen/logrus).
 
 ```go
 
@@ -45,6 +53,33 @@ log.WithFields(map[string]interface{}{
 
 someError := errors.New("an error occurred")
 log.WithError(someError).Error("some Error log")
+
+```
+
+### Gorm adapter
+
+An incoming adapter is used to collect log messages. Here we are collecting logs from [Gorm](https://github.com/go-gorm/gorm)
+
+```go
+
+log = logc.NewLogrus(logrus.New())
+
+log.Info("connecting to db - started")
+
+db, err0 := gorm.Open(sqlite.Open("file::memory:"), &gorm.Config{
+	Logger: logging.NewGormLogger(log),
+})
+
+log.Info("connecting to db - completed")
+
+log.Info("running db auto migration - started")
+
+db.AutoMigrate(&User{})
+
+log.Info("running db auto migration - completed")
+
+user := User{Name: "shmc", Age: 18, Birthday: time.Now()}
+result := db.Create(&user)
 
 ```
 
