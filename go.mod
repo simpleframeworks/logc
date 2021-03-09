@@ -1,4 +1,4 @@
-module github.com/simpleframeworks/LogC
+module github.com/simpleframeworks/logc
 
 go 1.16
 

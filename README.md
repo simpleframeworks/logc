@@ -2,7 +2,7 @@
 
 A common and universal logging interface that every package in the `simple frameworks` org uses. 
 
-[![test status](https://github.com/simpleframeworks/LogC/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/simpleframeworks/LogC/actions)
+[![test status](https://github.com/simpleframeworks/logc/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/simpleframeworks/logc/actions)
 
 Adapters to common logging libraries are provided so whatever logging library that you decide to use can be supported.
 
@@ -24,7 +24,7 @@ type Logger interface {
 ### Download it
 
 ```
-go get -u github.com/simpleframeworks/LogC
+go get -u github.com/simpleframeworks/logc
 ```
 
 ### Logrus example
