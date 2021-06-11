@@ -32,6 +32,31 @@ func (l *Logrus) Error(args ...interface{}) {
 	l.entry.Error(args...)
 }
 
+// Tracef .
+func (l *Logrus) Tracef(format string, args ...interface{}) {
+	l.entry.Tracef(format, args...)
+}
+
+// Debugf .
+func (l *Logrus) Debugf(format string, args ...interface{}) {
+	l.entry.Debugf(format, args...)
+}
+
+// Infof .
+func (l *Logrus) Infof(format string, args ...interface{}) {
+	l.entry.Infof(format, args...)
+}
+
+// Warnf .
+func (l *Logrus) Warnf(format string, args ...interface{}) {
+	l.entry.Warnf(format, args...)
+}
+
+// Errorf .
+func (l *Logrus) Errorf(format string, args ...interface{}) {
+	l.entry.Errorf(format, args...)
+}
+
 // WithField .
 func (l *Logrus) WithField(key string, value interface{}) Logger {
 	return NewLogrusEntry(l.entry.WithField(key, value))

@@ -56,17 +56,16 @@ func (l *GormLogger) Trace(ctx context.Context, begin time.Time, fc func() (stri
 			fields[l.sourceField] = utils.FileWithLineNum()
 		}
 		if err != nil && !(errors.Is(err, gorm.ErrRecordNotFound) && l.skipErrRecordNotFound) {
-			fields[logrus.ErrorKey] = err
-			l.log.WithFields(fields).Error("%s [%s]", sql, elapsed)
+			l.log.WithError(err).WithFields(fields).Errorf("%s [%s]", sql, elapsed)
 			return
 		}
 
 		if l.slowThreshold != 0 && elapsed > l.slowThreshold {
-			l.log.WithFields(fields).Warn("%s [%s]", sql, elapsed)
+			l.log.WithFields(fields).Debugf("%s [%s]", sql, elapsed)
 			return
 		}
 
-		l.log.WithFields(fields).Debug("%s [%s]", sql, elapsed)
+		l.log.WithFields(fields).Tracef("%s [%s]", sql, elapsed)
 	}
 }
 
