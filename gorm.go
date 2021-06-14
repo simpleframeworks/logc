@@ -14,10 +14,10 @@ import (
 // GormLogger .
 type GormLogger struct {
 	log                   Logger
-	slowThreshold         time.Duration
-	sourceField           string
-	skipErrRecordNotFound bool
-	silent                bool
+	SlowThreshold         time.Duration
+	SourceField           string
+	SkipErrRecordNotFound bool
+	Silent                bool
 }
 
 // LogMode .
@@ -48,19 +48,19 @@ func (l *GormLogger) Error(ctx context.Context, s string, args ...interface{}) {
 
 // Trace .
 func (l *GormLogger) Trace(ctx context.Context, begin time.Time, fc func() (string, int64), err error) {
-	if !l.silent {
+	if !l.Silent {
 		elapsed := time.Since(begin)
 		sql, _ := fc()
 		fields := logrus.Fields{}
-		if l.sourceField != "" {
-			fields[l.sourceField] = utils.FileWithLineNum()
+		if l.SourceField != "" {
+			fields[l.SourceField] = utils.FileWithLineNum()
 		}
-		if err != nil && !(errors.Is(err, gorm.ErrRecordNotFound) && l.skipErrRecordNotFound) {
+		if err != nil && !(errors.Is(err, gorm.ErrRecordNotFound) && l.SkipErrRecordNotFound) {
 			l.log.WithError(err).WithFields(fields).Errorf("%s [%s]", sql, elapsed)
 			return
 		}
 
-		if l.slowThreshold != 0 && elapsed > l.slowThreshold {
+		if l.SlowThreshold != 0 && elapsed > l.SlowThreshold {
 			l.log.WithFields(fields).Debugf("%s [%s]", sql, elapsed)
 			return
 		}
@@ -73,8 +73,8 @@ func (l *GormLogger) Trace(ctx context.Context, begin time.Time, fc func() (stri
 func NewGormLogger(logger Logger) *GormLogger {
 	return &GormLogger{
 		log:           logger,
-		slowThreshold: time.Second * time.Duration(1),
-		sourceField:   "src",
-		silent:        false,
+		SlowThreshold: time.Second * time.Duration(1),
+		SourceField:   "src",
+		Silent:        false,
 	}
 }
